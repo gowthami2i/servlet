@@ -1,5 +1,10 @@
 package com.ideas2it.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,9 +44,11 @@ public class Trainee extends Employee {
     @Column(name = "no_Of_Task")
     private int task;
 
-    @ManyToMany(targetEntity = Trainer.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Trainer.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
                joinColumns = {@JoinColumn(name = "trainee_id")})
+    @Fetch(FetchMode.SELECT)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Trainer> trainer;
 
     public void setId(int id) {
@@ -74,4 +81,20 @@ public class Trainee extends Employee {
         return trainer;
     }
 
+    @Override
+    public String toString() {
+        return "{\" id\":\"" +getId() +
+
+                "\",\" firstName\":\"" + getFirstName() +
+                "\",\" lastName\":\"" + getLastName() +
+                "\",\" DateOfBirth\":\"" + getDateOfBirth() +
+                "\",\" email\":\"" + getEmail() +
+                "\",\" mobileNumber\":\"" + getMobileNumber() +
+                "\",\" aadharCardNumber\":\"" + getAadharNumber() +
+                "\",\" panCard\":\"" + getPanCard() +
+                "\",\" project\":\"" + getSkillSet() +
+                "\",\" experience\":\"" +getTask()  +
+                "\",\" Trainerlist "+getTrainerDetails()+
+                "\"}";
+    }
 }

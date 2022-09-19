@@ -44,7 +44,7 @@ public class EmployeeController extends HttpServlet {
 
     
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
-    private static final EmployeeService employeeServiceImpl = new EmployeeServiceImpl();
+    static final EmployeeService employeeServiceImpl = new EmployeeServiceImpl();
 
     /**
      * method is used to Show the Menu details
@@ -519,11 +519,9 @@ public class EmployeeController extends HttpServlet {
 
 
     }*/
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+   /* public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String paramValue = request.getParameter("id");
-
         if (!paramValue.isEmpty()) {
 
                 String uri = request.getRequestURI();
@@ -549,12 +547,14 @@ public class EmployeeController extends HttpServlet {
             int id = 0;
             id = Integer.parseInt(paramValue);
                 Trainer trainer = null;
-                try {
+
+            try {
                     trainer = employeeServiceImpl.searchTrainerDetailsById(id);
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                if (trainer != null) {
+            if (trainer != null) {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("Trainer First Name   :" + trainer.getFirstName() + "\n")
                             .append("Trainer Email        :" + trainer.getEmail() + "\n")
@@ -573,7 +573,7 @@ public class EmployeeController extends HttpServlet {
                         logger.error("Invalid Employee ID");
                 }
             }
-    }
+    }*/
 
 
 

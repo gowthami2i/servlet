@@ -1,6 +1,13 @@
 package com.ideas2it.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.Column;
 import javax.persistence.CascadeType;
@@ -38,9 +45,11 @@ public class Trainer extends Employee  {
     @Column(name = "experience")
     private int experience;
       
-    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
                joinColumns = {@JoinColumn(name= "trainer_id")})
+    @Fetch(FetchMode.SELECT)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Trainee> trainee;
     
     public void setId(int id) {
@@ -72,6 +81,25 @@ public class Trainer extends Employee  {
     public List<Trainee> getTraineeDetails() {
         return trainee;
     }
-  
+
+    @Override
+    public String toString() {
+        boolean traineeDetails;
+        return "{\" id\":\"" +getId() +
+
+                "\",\" firstName\":\"" + getFirstName() +
+                "\",\" lastName\":\"" + getLastName() +
+                "\",\" DateOfBirth\":\"" + getDateOfBirth() +
+                "\",\" email\":\"" + getEmail() +
+                "\",\" mobileNumber\":\"" + getMobileNumber() +
+                "\",\" aadharCardNumber\":\"" + getAadharNumber() +
+                "\",\" panCard\":\"" + getPanCard() +
+                "\",\" project\":\"" + getProject() +
+
+                /*"\",\" Trainees\":\"" +getTraineeDetails().stream().flatMap(trainer ->
+                Stream.of("\"" + trainer.getId() + "\":\"" +
+                        trainer.getFirstName() + "\"")).collect(Collectors.toSet())+*/
+                "\",\"}";
+    }
 }
 
