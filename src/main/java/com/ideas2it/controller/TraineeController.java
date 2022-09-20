@@ -20,12 +20,11 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.ideas2it.controller.EmployeeController.employeeServiceImpl;
 
 
 public class TraineeController extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+   // private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     private static final EmployeeService employeeServiceImpl = new EmployeeServiceImpl();
     ObjectMapper mapper = new ObjectMapper();
 
@@ -46,7 +45,7 @@ public class TraineeController extends HttpServlet {
             }
 
             String payload = buffer.toString();
-            Trainee trainee= mapper.readValue(payload, Trainee.class);
+            Trainee trainee = mapper.readValue(payload, Trainee.class);
             try {
                 //validationOfInputs(trainer, response);
                 boolean isChecked = employeeServiceImpl.addTrainee(trainee);
@@ -69,6 +68,7 @@ public class TraineeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
         List<Trainee> showTrainee = null;
+        PrintWriter printWriter = response.getWriter();
 
         try {
             showTrainee = employeeServiceImpl.getTraineesFromDao();
@@ -76,28 +76,23 @@ public class TraineeController extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        if(showTrainee != null) {
-            PrintWriter printWriter = response.getWriter();
-            showTrainee.forEach(entry -> printWriter.println("Trainee id : " + entry.getId() + "\n"
-                    + "Trainer First Name : " + entry.getFirstName() + "\n"
-                    + "Trainer Blood Group : " + entry.getBloodGroup() + "\n"
-                    + "Trainer MobileNumber : " + entry.getMobileNumber() + "\n"
-                    + "Trainer Email Id : " + entry.getEmail() + "\n"
-                    + "Trainer Aadhar Number :" + entry.getAadharNumber() + "\n"
-                    + "Trainer PanCard : " + entry.getPanCard() + "\n"
-                    + "************************************"));
-        }
-        else {
-            PrintWriter printWriter = response.getWriter();
+        if (showTrainee != null) {
+
+            String jsonStr = mapper.writeValueAsString(showTrainee);
+            printWriter.print(jsonStr);
+
+
+        } else {
             printWriter.println("nodata");
         }
     }
+
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String paramValue = request.getParameter("id");
         int id = Integer.parseInt(paramValue);
         PrintWriter printWriter = response.getWriter();
-        String message =" ";
+        String message = " ";
 
 
         if (0 != id) {
@@ -108,15 +103,99 @@ public class TraineeController extends HttpServlet {
                 throw new RuntimeException(e);
             }
             if (isCheckedDelete) {
-                printWriter.println("Deleted Trainee sucessfully");
+                printWriter.println("Deleted sucessfully");
             } else {
                 printWriter.println("not Deleted ");
             }
-        }
-        else {
-            printWriter.println(" Trainee Id not found ");
+        } else {
+            printWriter.println(" Trainer Id not found ");
         }
     }
 
-}
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        String pathInfo = request.getPathInfo();
+        String message = "*** Not Inserted ***";
+        if (pathInfo == null || pathInfo.equals("/")) {
+            if (uri.equals("/ServletExample/trainee")) {
 
+                StringBuilder buffer = new StringBuilder();
+                BufferedReader reader = request.getReader();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                String payload = buffer.toString();
+                Trainee trainee = mapper.readValue(payload, Trainee.class);
+                int id = trainee.getId();
+                try {
+
+                    boolean isChecked = (employeeServiceImpl.updatedTraineeDetails(id, trainee));
+                    if (isChecked) {
+                        message = "***** Insert Sucessfully *****";
+                    } else {
+                        message = "not Inserted";
+                    }
+                    response.getOutputStream().println(message);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                PrintWriter printWriter = response.getWriter();
+                try {
+
+                    String paramValue = request.getParameter("traineeid");
+                    System.out.println(paramValue);
+                    int traineeId = Integer.parseInt(paramValue);
+                    List<Trainer> trainer = (List<Trainer>) employeeServiceImpl.getTrainersFromDao();
+
+                    try {
+                        Trainee trainee = employeeServiceImpl.searchTraineeDetailsById(traineeId);
+
+                        if (trainee != null) {
+
+                            String paramValueTrainer = request.getParameter("trainerid");
+                            System.out.println(paramValueTrainer +"trainerid");
+                            String[] trainerId = paramValueTrainer.split(",");
+                            int id = 0;
+
+                            for (int i = 0; i < trainerId.length; i++) {
+                                id = Integer.valueOf(trainerId[i]);
+
+
+                                for (Trainer retriveTrainer : trainer) {
+
+                                    if (retriveTrainer.getId() == id) {
+                                        trainee.getTrainerDetails().add(retriveTrainer);
+
+                                    }
+                                }
+                            }
+                            boolean isChecked = employeeServiceImpl.updatedTraineeDetails(traineeId, trainee);
+                            if (isChecked) {
+                                printWriter.println("Assigned Sucessfull");
+                            } else {
+                                printWriter.println("notAssigned");
+                            }
+
+                        } else {
+
+                            printWriter.println("no trainer");
+                        }
+                    } catch (NumberFormatException exception) {
+                        printWriter.println("Enter the valid traineeID");
+                        throw exception;
+
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+    }
+}

@@ -1,13 +1,10 @@
 package com.ideas2it.model;
 
-import java.sql.Date;
-import java.time.Period;
-import java.util.UUID;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 
@@ -30,13 +27,13 @@ public class Employee {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     
     @Column(name = "mobilenumber")
     private long  mobileNumber;
 
     @Column(name = "date_of_joinning")
-    private Date dateOfJoinning;
+    private LocalDate dateOfJoinning;
     
     @Column(name = "email")
     private String email;
@@ -71,10 +68,10 @@ public class Employee {
     }
 
   
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
 	this.dateOfBirth = dateOfBirth;
     }
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
        return dateOfBirth;
     }
 
@@ -93,11 +90,11 @@ public class Employee {
 	this.email=email;
     }
 
-    public void setDateOfJoinning(Date dateOfJoinning) {
+    public void setDateOfJoinning(LocalDate dateOfJoinning) {
 	this.dateOfJoinning = dateOfJoinning;
     }
 
-    public Date getDateOfJoinning() {
+    public LocalDate getDateOfJoinning() {
 	return dateOfJoinning;
     }
 

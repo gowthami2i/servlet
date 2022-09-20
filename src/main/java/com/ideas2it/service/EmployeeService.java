@@ -28,7 +28,7 @@ public interface EmployeeService {
      * method is used to add Trainer 
      * @param {@link String} employeeId
      * @param {@link Trainer} trainer Object
-     * @return {@link void }
+     * @return {@link  }
      */
     boolean addTrainer(Trainer trainer) throws Exception;
 
@@ -36,12 +36,12 @@ public interface EmployeeService {
      * method is used to add Trainee 
      * @param {@link String} employeeId
      * @param {@link Trainer} trainee Object
-     * @return {@link void }
+     * @return {@link }
      */
     boolean addTrainee(Trainee trainee)throws Exception;
    
     /**
-     * method is used to get Trainer from Dao 
+     * method is used to get Trainer from Dao
      * @return {@link Map<String , Trainer>} trainersFromDao object
      */
     List<Trainer> getTrainersFromDao() throws Exception;
@@ -67,14 +67,14 @@ public interface EmployeeService {
     /**
      * method is used to deleteTrainerDetails
      * @param {@link String} removeEmployeeId
-     * @return {@link void} 
+     * @return {@link }
      */
     boolean deleteTrainerDetails(int removeEmployeeId) throws Exception;
     
     /**
      * method is used to deleteTraineeDetails
      * @param {@link String} removeEmployeeId
-     * @return {@link void} 
+     * @return {@link }
      */
     boolean deleteTraineeDetails(int removeEmployeeId) throws Exception;
 
@@ -83,7 +83,7 @@ public interface EmployeeService {
      * method is used to updateTrainerDetails
      * @param {@link String} employeeId
      * @param {@link Trainer} searchedUpdateTrainer object
-     * @return {@link void} 
+     * @return {@link }
      */
     boolean updatedTrainerDetails(int employeeId, Trainer searchedUpdateTrainer) throws Exception;
 
@@ -91,9 +91,11 @@ public interface EmployeeService {
      * method is used to updateTraineeDetails
      * @param {@link String} employeeId
      *@param {@link Trainer} searchedUpdateTrainee object
-     * @return {@link void} 
+     * @return {@link }
      */
     boolean updatedTraineeDetails(int employeeId, Trainee searchedUpdateTrainee) throws Exception;
+
+    Map<String, Object> getObject(Trainer trainers);
     
 }
 

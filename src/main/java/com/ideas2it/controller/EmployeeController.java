@@ -1,4 +1,4 @@
-package com.ideas2it.controller;
+/*package com.ideas2it.controller;
 
 
 import java.io.IOException;
@@ -39,18 +39,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author  Gowtham P
  * @version java 1.0
  * 
- */
+ *
 public class EmployeeController extends HttpServlet {
 
     
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
-    static final EmployeeService employeeServiceImpl = new EmployeeServiceImpl();
+   // private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+    //static final EmployeeService employeeServiceImpl = new EmployeeServiceImpl();
 
     /**
      * method is used to Show the Menu details
      * 
      * @return {@link }
-     */
+     *
     public void viewMenu() {
        
         Scanner scanner = new Scanner(System.in);       
@@ -161,9 +161,9 @@ public class EmployeeController extends HttpServlet {
                             logger.error("Invalid Employee ID");
                          }
                     }
-                        break;*/
+                        break;
 
-                    case 4 :
+                    /*case 4 :
 
                         logger.info("Which details you want to update ? ");
                         logger.info("1.Trainer");
@@ -343,13 +343,13 @@ public class EmployeeController extends HttpServlet {
             viewMenu();
         }
 
-    } 
+    }
     /**
      * method is used to get Employee Common information by the user
      * @param {@link Scanner}scanner object 
      * @param {@link EmployeeService} employeeServiceImpl Object
      * @return {@link Trainer} trainer object
-     */
+     *
     public Employee getEmployeeDetailsFromUser (Scanner scanner) {
   
         Employee employee = new Employee();
@@ -387,7 +387,7 @@ public class EmployeeController extends HttpServlet {
      * @param {@link Scanner}scanner object 
      * @param {@link EmployeeService} employeeServiceImpl Object
      * @return {@link Trainer} trainer object
-     */
+     *
     public Trainer getTrainersDetailsFromUser(Scanner scanner) throws Exception {
         Trainer trainers = new Trainer();
         try {
@@ -433,7 +433,7 @@ public class EmployeeController extends HttpServlet {
      * @param {@link Scanner}scanner object
      * @param {@link EmployeeService} employeeServiceImpl Object
      * @return {@link Trainee} trainee object
-     */
+     *
     public Trainee getTraineesDetailsFromUser(Scanner scanner) throws Exception {         
         Trainee trainees = new Trainee();
         try {
@@ -479,7 +479,7 @@ public class EmployeeController extends HttpServlet {
     /**
      * method is used to display the Trainer information 
      * @return {@link } no return Value
-     */
+     *
   /*  public List<Trainer>  displayTrainerDetails() throws Exception {
 
         List<Trainer> showTrainer =  employeeServiceImpl.getTrainersFromDao();
@@ -580,7 +580,7 @@ public class EmployeeController extends HttpServlet {
     /**
      * method is used to display the Trainee information 
      * @return {@link } no return value
-     */
+     *
     public void displayTraineeDetails() throws Exception {
          
         List <Trainee> showTrainee =  employeeServiceImpl.getTraineesFromDao();
@@ -598,7 +598,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate name 
      * @param {@link Scanner}scanner object 
      * @return {@link String} name 
-     */
+     *
     public String getName(Scanner scanner) {
 
         boolean isCheckName = true;
@@ -619,7 +619,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate Date 
      * @param {@link Scanner}scanner object 
      * @return {@link String} Date
-     */
+     *
     public String getDate(Scanner scanner)  {
 
         boolean isCheckDateFormat = true;
@@ -646,7 +646,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate MobileNumber
      * @param {@link Scanner}scanner object 
      * @return {@link String}validatedMobileNumber 
-     */
+     *
     public long getMobileNumber(Scanner scanner) {
                                               
         boolean isCheckMobileNumber = true;
@@ -670,7 +670,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate Email
      * @param {@link Scanner}scanner object 
      * @return {@link String}email 
-     */ 
+     *
     public String getEmail(Scanner scanner) {
 
         boolean isCheckEmail = true;
@@ -697,7 +697,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate AadharNumber
      * @param {@link Scanner}scanner object 
      * @return {@link String}aadharNumber 
-     */
+     *
     public String getAadharNumber(Scanner scanner) {
     
         boolean isCheckAadharNumber = true; 
@@ -720,7 +720,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate PanCard
      * @param {@link Scanner}scanner object 
      * @return {@link String}PanCard
-     */
+     *
     public String getPanCard(Scanner scanner) {
 
         boolean isCheckPanCard = true;
@@ -743,7 +743,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to validate Blood Group
      * @param {@link Scanner}scanner object 
      * @return {@link String}Blood Group
-     */
+     *
     public String getBloodGroup(Scanner scanner) {
 
         boolean isCheckBloodGroup = true;
@@ -767,7 +767,7 @@ public class EmployeeController extends HttpServlet {
      * @param {@link Scanner}scanner object
      * @param {@link Trainer} updateTrainer object
      * @return {@link Trainer} updateTrainer object
-     */
+     *
     public Trainer updateTrainerDetails(Scanner scanner ,Trainer updateTrainer) throws Exception {
 
         scanner.nextLine();
@@ -904,7 +904,7 @@ public class EmployeeController extends HttpServlet {
      * @param {@link Scanner}scanner object
      * @param {@link Trainee} updateTrainee Object
      * @return {@link Trainee} updateTrainee object
-     */
+     *
     public Trainee updateTraineeDetails(Scanner scanner ,Trainee updateTrainee) throws Exception{
         scanner.nextLine();
         boolean isCheckName = true;
@@ -1040,7 +1040,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to Associate Trainees to Trainer
      * @param {@link Scanner}scanner object
      * @return {@link }
-     */ 
+     *
      public void  assignTraineesToTrainer(Scanner scanner) throws Exception {
 
         try {
@@ -1083,7 +1083,7 @@ public class EmployeeController extends HttpServlet {
      * method is used to Associate Trainer to Trainee
      * @param {@link Scanner}scanner object
      * @return {@link }
-     */
+     *
     public void  assignTrainersToTrainee(Scanner scanner) throws Exception {
 
         try {
@@ -1190,4 +1190,4 @@ public class EmployeeController extends HttpServlet {
             logger.error("Trainee Id not found");
         }                                                                                                                                                                                                                                                                                              
     }
-}
+}*/

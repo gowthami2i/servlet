@@ -1,16 +1,13 @@
 package com.ideas2it.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.time.LocalDate;
-import java.time.Period;
-
-import org.hibernate.HibernateException;
 
 import com.ideas2it.model.Employee;
 import com.ideas2it.model.Trainer;
 import com.ideas2it.model.Trainee;
-import com.ideas2it.dao.EmployeeDao;
 import com.ideas2it.dao.impl.EmployeeDaoImpl;
 import com.ideas2it.service.EmployeeService;
 
@@ -55,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     * method is used to get Trainer from Dao 
+     * method is used to get Trainer from Dao
      * @return {@link Map<String , Trainer>} trainers object
      */
 
@@ -152,6 +149,24 @@ public class EmployeeServiceImpl implements EmployeeService {
          
         boolean isUpdateTrainee = employeeDaoImpl.modifyTraineeDetailsById(employeeId, searchedUpdateTrainee);
         return isUpdateTrainee;
+    }
+    public Map<String, Object> getObject(Trainer trainer) {
+        List<Map<String, Object>> trainee = new ArrayList<>();
+        List<Trainee> list = trainer.getTraineeDetails();
+        System.out.println(list);
+        for(Trainee traineeList : list){
+            Map<String,Object> listTrainee = new HashMap<>();
+            listTrainee.put("traineeId",traineeList.getId());
+            listTrainee.put("Trainee Name",traineeList.getFirstName());
+            trainee.add(listTrainee);
+
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("trainerId",trainer.getId());
+        map.put("TrainerName",trainer.getFirstName());
+        map.put("Trainer email",trainer.getEmail());
+        map.put("trainees", trainee);
+        return map;
     }
 
 }

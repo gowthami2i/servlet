@@ -6,8 +6,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.Column;
 import javax.persistence.CascadeType;
@@ -44,7 +42,7 @@ public class Trainer extends Employee  {
 
     @Column(name = "experience")
     private int experience;
-      
+
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
                joinColumns = {@JoinColumn(name= "trainer_id")})
@@ -82,10 +80,10 @@ public class Trainer extends Employee  {
         return trainee;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         boolean traineeDetails;
-        return "{\" id\":\"" +getId() +
+       /* return "{\" id\":\"" +getId() +
 
                 "\",\" firstName\":\"" + getFirstName() +
                 "\",\" lastName\":\"" + getLastName() +
@@ -98,8 +96,8 @@ public class Trainer extends Employee  {
 
                 /*"\",\" Trainees\":\"" +getTraineeDetails().stream().flatMap(trainer ->
                 Stream.of("\"" + trainer.getId() + "\":\"" +
-                        trainer.getFirstName() + "\"")).collect(Collectors.toSet())+*/
+                        trainer.getFirstName() + "\"")).collect(Collectors.toSet())+
                 "\",\"}";
-    }
+    }*/
 }
 

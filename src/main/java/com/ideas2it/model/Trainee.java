@@ -1,5 +1,9 @@
 package com.ideas2it.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
@@ -16,7 +20,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -44,11 +47,13 @@ public class Trainee extends Employee {
     @Column(name = "no_Of_Task")
     private int task;
 
+
     @ManyToMany(targetEntity = Trainer.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
                joinColumns = {@JoinColumn(name = "trainee_id")})
     @Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
+    
     private List<Trainer> trainer;
 
     public void setId(int id) {
@@ -81,7 +86,7 @@ public class Trainee extends Employee {
         return trainer;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "{\" id\":\"" +getId() +
 
@@ -96,5 +101,5 @@ public class Trainee extends Employee {
                 "\",\" experience\":\"" +getTask()  +
                 "\",\" Trainerlist "+getTrainerDetails()+
                 "\"}";
-    }
+    }*/
 }

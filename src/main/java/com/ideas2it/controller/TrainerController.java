@@ -1,6 +1,9 @@
 package com.ideas2it.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.Gson;
+import com.ideas2it.model.Employee;
 import com.ideas2it.model.Trainee;
 import com.ideas2it.model.Trainer;
 import com.ideas2it.service.EmployeeService;
@@ -9,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +20,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
-import static java.lang.System.out;
+/**
+ * <h1>Trainer Controller</h1>
+ * The Trainer Controller class is used to get infromation from the user .
+ *
+ * @author  Gowtham P
+ * @version java 1.0
+ *
+ */
 
 public class TrainerController extends HttpServlet {
 
@@ -27,6 +37,13 @@ public class TrainerController extends HttpServlet {
     private static final EmployeeService employeeServiceImpl = new EmployeeServiceImpl();
     ObjectMapper mapper = new ObjectMapper();
 
+
+    /**
+     * method is used to to get a request a data the user
+     * @param {@link Scanner}scanner object 
+     * @param {@link EmployeeService} employeeServiceImpl Object
+     * @return {@link Trainer} trainer object
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String pathInfo = request.getPathInfo();
@@ -35,18 +52,16 @@ public class TrainerController extends HttpServlet {
 
             StringBuilder buffer = new StringBuilder();
             BufferedReader reader = request.getReader();
-            out.println(reader + "reader");
 
             String line;
             while ((line = reader.readLine()) != null) {
-                out.println(buffer.append(line) + "insdie while");
+                buffer.append(line) ;
 
             }
-
             String payload = buffer.toString();
-            Trainer trainer = mapper.readValue(payload, Trainer.class);
+            Trainer trainer = mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                                .findAndRegisterModules().readValue(payload, Trainer.class);
             try {
-                //validationOfInputs(trainer, response);
                 boolean isChecked = (employeeServiceImpl.addTrainer(trainer));
                 if (isChecked) {
                     message = "***** Insert Sucessfully *****";
@@ -65,6 +80,19 @@ public class TrainerController extends HttpServlet {
         }
     }
 
+   /* public  void validateTrainerInformation(Trainer trainer) {
+        String name = trainer.getFirstName();
+        trainer.getLastName();
+        trainer.getEmail();
+        trainer.getAadharNumber();
+        trainer.getDateOfBirth();
+        trainer.getDateOfJoinning();
+        trainer.getMobileNumber();
+        trainer.getPanCard();
+
+        getName(trainer.getFirstName(name));
+    }*/
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 
@@ -73,23 +101,24 @@ public class TrainerController extends HttpServlet {
         if (uri.equals("/ServletExample/trainers")) {
 
             try {
-                showTrainer = employeeServiceImpl.getTrainersFromDao();
+                showTrainer = (List<Trainer>) employeeServiceImpl.getTrainersFromDao();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             PrintWriter printWriter = response.getWriter();
-            printWriter.print(showTrainer);
+            for(Trainer trainers : showTrainer) {
+                Map<String, Object> trainers1 = employeeServiceImpl.getObject(trainers);
 
+                printWriter.println( new Gson().toJson(trainers1));
+            }
+            String jsonStr = mapper.writeValueAsString(showTrainer);
+            printWriter.print(jsonStr);
 
         } else {
             String paramValue = request.getParameter("id");
-            out.println(paramValue);
             int id = Integer.parseInt(paramValue);
             PrintWriter printWriter = response.getWriter();
-
-
             Trainer trainer = null;
-
             try {
                 trainer = employeeServiceImpl.searchTrainerDetailsById(id);
 
@@ -97,17 +126,9 @@ public class TrainerController extends HttpServlet {
                 throw new RuntimeException(e);
             }
             if (trainer != null) {
-                StringBuilder stringBuilder = new StringBuilder();
 
-                for (int i = 0; i < trainer.getTraineeDetails().size(); i++) {
-
-                    stringBuilder.append((String.format("%d ." + "Trainee Name :" + trainer.getTraineeDetails().get(i).getFirstName() + "\n"+
-                            "Trainee Id :" + trainer.getTraineeDetails().get(i).getId() + "\n", i + 1)));
-                     stringBuilder.append(trainer);
-                }
-
+                printWriter.println( new Gson().toJson(trainer));
             } else {
-
                 logger.error("Invalid Employee ID");
             }
         }
@@ -142,8 +163,9 @@ public class TrainerController extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String pathInfo = request.getPathInfo();
-        String message = "*** Not Inserted ***";
+
         if (pathInfo == null || pathInfo.equals("/")) {
+            PrintWriter printWriter = response.getWriter();
             if (uri.equals("/ServletExample/trainer")) {
 
                 StringBuilder buffer = new StringBuilder();
@@ -159,19 +181,19 @@ public class TrainerController extends HttpServlet {
                 try {
 
                     boolean isChecked = (employeeServiceImpl.updatedTrainerDetails(id, trainer));
-                    if (isChecked) {
-                        message = "***** Insert Sucessfully *****";
+                    if (!isChecked) {
+                        printWriter.println("***** Insert Sucessfully *****");
                     } else {
-                        message = "not Inserted";
+                        printWriter.println("not Inserted");
                     }
-                    response.getOutputStream().println(message);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            } else  {
-                PrintWriter printWriter = response.getWriter();
+            } else if (uri.equals("/ServletExample/assigntrainer")) {
+
+
                 try {
 
                     String paramValue = request.getParameter("trainerid");
@@ -190,13 +212,13 @@ public class TrainerController extends HttpServlet {
                             for (int i = 0; i < traineeId.length; i++) {
                                 id = Integer.valueOf(traineeId[i]);
 
+
                                 for (Trainee retriveTrainee : trainee) {
 
                                     if (retriveTrainee.getId() == id) {
                                         trainer.getTraineeDetails().add(retriveTrainee);
-                                    } else {
-                                        out.println("no trainee");
                                     }
+
                                 }
                             }
                             boolean isChecked = employeeServiceImpl.updatedTrainerDetails(trainerId, trainer);
@@ -220,12 +242,11 @@ public class TrainerController extends HttpServlet {
                 }
 
 
-            } //else {
-                //response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                //response.getOutputStream().println(message);
-            //}
+            } else {
 
-
+                printWriter.println("Invalid URI");
+            }
         }
+
     }
 }

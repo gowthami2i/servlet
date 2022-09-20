@@ -31,5 +31,13 @@
         <servlet-name>TraineeController</servlet-name>
         <url-pattern>/trainee</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TraineeController</servlet-name>
+        <url-pattern>/trainees</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TraineeController</servlet-name>
+        <url-pattern>/assigntrainee</url-pattern>
+    </servlet-mapping>
 
 </web-app>
