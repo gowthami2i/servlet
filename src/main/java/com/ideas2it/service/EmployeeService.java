@@ -94,8 +94,8 @@ public interface EmployeeService {
      * @return {@link }
      */
     boolean updatedTraineeDetails(int employeeId, Trainee searchedUpdateTrainee) throws Exception;
-
-    Map<String, Object> getObject(Trainer trainers);
+    Map<String, Object> getTrainerObject(Trainer trainer);
+    Map<String, Object> getTraineeObject(Trainee trainee);
     
 }
 

@@ -1,20 +1,16 @@
 package com.ideas2it.dao.impl;
 
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException; 
-import org.hibernate.Session; 
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ideas2it.model.Employee;
 import com.ideas2it.model.Trainee;
 import com.ideas2it.model.Trainer;
-import com.ideas2it.dao.EmployeeDao;
 import com.ideas2it.factory.EmployeeFactory;
 
 /**
@@ -258,6 +254,7 @@ public class EmployeeDaoImpl {
             trainers.setDateOfBirth(trainer.getDateOfBirth());
             trainers.setMobileNumber(trainer.getMobileNumber());
             trainers.setBloodGroup(trainer.getBloodGroup());
+            trainers.setPanCard(trainer.getPanCard());
             trainers.setTraineeDetails(trainer.getTraineeDetails());       
             session.update(trainers);
             isUpdateTrainer = true;
@@ -290,7 +287,8 @@ public class EmployeeDaoImpl {
             trainees.setEmail(trainee.getEmail());
             trainees.setDateOfBirth(trainee.getDateOfBirth());
             trainees.setMobileNumber(trainee.getMobileNumber());
-            trainees.setBloodGroup(trainee.getBloodGroup()); 
+            trainees.setBloodGroup(trainee.getBloodGroup());
+            trainees.setPanCard(trainee.getPanCard());
             trainees.setTrainerDetails(trainee.getTrainerDetails());
             session.update(trainees);
             isUpdateTrainee = true;

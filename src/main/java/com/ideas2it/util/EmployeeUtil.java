@@ -115,11 +115,11 @@ public class  EmployeeUtil {
      * @param {@link String} email
      * @return {@link boolean) isValidMail
      */
-    public static boolean isValidateEmail(String email) throws EmailMismatchException {
+    public static boolean isValidateEmail(String email) {
         
       boolean isValidMail = EmailValidator.getInstance().isValid(email);
       if(!isValidMail) {
-          throw new EmailMismatchException("Enter valid Email ID");
+          isValidMail = false;
       }
       return isValidMail;
     }
@@ -139,6 +139,7 @@ public class  EmployeeUtil {
              int year = Integer.valueOf(date[0]);
              if ((currentYear-60) <= year && year <= (currentYear-18)) {
                  isValidateDate = DateValidator.getInstance().isValid(employeeDateOfBirth,"yyyy-MM-dd");
+                 isValidateDate = true;
              }
          } catch (NumberFormatException e) {
              throw e;

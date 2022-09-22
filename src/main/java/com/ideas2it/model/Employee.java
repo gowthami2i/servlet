@@ -2,6 +2,7 @@ package com.ideas2it.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -71,6 +72,7 @@ public class Employee {
     public void setDateOfBirth(LocalDate dateOfBirth) {
 	this.dateOfBirth = dateOfBirth;
     }
+
     public LocalDate getDateOfBirth() {
        return dateOfBirth;
     }

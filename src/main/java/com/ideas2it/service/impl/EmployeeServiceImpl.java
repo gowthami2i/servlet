@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ideas2it.model.Employee;
 import com.ideas2it.model.Trainer;
 import com.ideas2it.model.Trainee;
 import com.ideas2it.dao.impl.EmployeeDaoImpl;
@@ -150,10 +149,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         boolean isUpdateTrainee = employeeDaoImpl.modifyTraineeDetailsById(employeeId, searchedUpdateTrainee);
         return isUpdateTrainee;
     }
-    public Map<String, Object> getObject(Trainer trainer) {
+    public Map<String, Object> getTrainerObject(Trainer trainer) {
         List<Map<String, Object>> trainee = new ArrayList<>();
         List<Trainee> list = trainer.getTraineeDetails();
-        System.out.println(list);
+
         for(Trainee traineeList : list){
             Map<String,Object> listTrainee = new HashMap<>();
             listTrainee.put("traineeId",traineeList.getId());
@@ -165,8 +164,35 @@ public class EmployeeServiceImpl implements EmployeeService {
         map.put("trainerId",trainer.getId());
         map.put("TrainerName",trainer.getFirstName());
         map.put("Trainer email",trainer.getEmail());
+        map.put("Trainer Blood Group" ,trainer.getBloodGroup());
+        map.put("Trainer Pancard",trainer.getPanCard() );
+        map.put("Trainer Mobile Number", trainer.getMobileNumber());
+
         map.put("trainees", trainee);
         return map;
     }
+    public Map<String, Object> getTraineeObject(Trainee trainee) {
+        List<Map<String, Object>> trainer = new ArrayList<>();
+        List<Trainer> list = trainee.getTrainerDetails();
+
+        for(Trainer trainerList : list){
+            Map<String,Object> listTrainer = new HashMap<>();
+            listTrainer.put("trainerId",trainerList.getId());
+            listTrainer.put("Trainer Name",trainerList.getFirstName());
+            trainer.add(listTrainer);
+
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("traineeId",trainee.getId());
+        map.put("TraineeName",trainee.getFirstName());
+        map.put("Trainee email",trainee.getEmail());
+        map.put("Trainee Blood Group" ,trainee.getBloodGroup());
+        map.put("Trainee Pancard",trainee.getPanCard() );
+        map.put("Trainee Mobile Number", trainee.getMobileNumber());
+
+        map.put("trainer", trainer);
+        return map;
+    }
+
 
 }

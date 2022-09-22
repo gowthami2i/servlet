@@ -37,26 +37,14 @@
       <change beforePath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/com.ideas2it.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/com.ideas2it.AppTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Application.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/EmployeeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TraineeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TraineeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/util/EmployeeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/util/EmployeeUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TrainerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TrainerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/dao/impl/EmployeeDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/dao/impl/EmployeeDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/service/EmployeeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/service/EmployeeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/service/impl/EmployeeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/service/impl/EmployeeServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,9 +105,6 @@
       <predefined_log_file id="Tomcat Host Manager Log" />
       <option name="contextPath" value="/ServletExample" />
       <option name="docBase" value="$PROJECT_DIR$/src/main/webapp" />
-      <option name="envOptions">
-        <map />
-      </option>
       <option name="tomcatInfo">
         <TomcatInfo>
           <option name="name" value="Apache Tomcat/8.5.82" />
