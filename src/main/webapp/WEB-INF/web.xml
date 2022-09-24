@@ -28,6 +28,10 @@
         <url-pattern>/assigntrainer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>TrainerController</servlet-name>
+        <url-pattern>/unassigntrainer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>TraineeController</servlet-name>
         <url-pattern>/trainee</url-pattern>
     </servlet-mapping>
@@ -39,5 +43,10 @@
         <servlet-name>TraineeController</servlet-name>
         <url-pattern>/assigntrainee</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TraineeController</servlet-name>
+        <url-pattern>/unassigntrainee</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

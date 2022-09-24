@@ -239,23 +239,24 @@ public class EmployeeDaoImpl {
      * @param {@link String} employeeId
      * @param {@link Trainer} searchedUpdateTrainer Object
      */
-    public boolean modifyTrainerDetailsById(int trainerId, Trainer trainer)  throws Exception {
+    public <session> boolean modifyTrainerDetailsById(int trainerId, Trainer trainer)  throws Exception {
 
         Transaction transaction = null;
-        boolean isUpdateTrainer = false; 
-        Session session = EmployeeFactory.getEmployeeFactory().openSession();
-        try {   
- 
-            Trainer trainers = (Trainer) session.get(Trainer.class, trainerId);
+        Session session = null;
+        boolean isUpdateTrainer = false;
+
+        try {
+            session = EmployeeFactory.getEmployeeFactory().openSession();
+           Trainer trainers = (Trainer) session.get(Trainer.class, trainerId);
             transaction = session.beginTransaction();        
-            trainers.setFirstName(trainer.getFirstName());
+           trainers.setFirstName(trainer.getFirstName());
             trainers.setLastName(trainer.getLastName());
             trainers.setEmail(trainer.getEmail());
             trainers.setDateOfBirth(trainer.getDateOfBirth());
             trainers.setMobileNumber(trainer.getMobileNumber());
             trainers.setBloodGroup(trainer.getBloodGroup());
             trainers.setPanCard(trainer.getPanCard());
-            trainers.setTraineeDetails(trainer.getTraineeDetails());       
+            trainers.setTraineeDetails(trainer.getTraineeDetails());
             session.update(trainers);
             isUpdateTrainer = true;
             transaction.commit();

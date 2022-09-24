@@ -85,7 +85,7 @@ public interface EmployeeService {
      * @param {@link Trainer} searchedUpdateTrainer object
      * @return {@link }
      */
-    boolean updatedTrainerDetails(int employeeId, Trainer searchedUpdateTrainer) throws Exception;
+    boolean updatedTrainerDetails(int employeeId, Trainer trainer) throws Exception;
 
     /**
      * method is used to updateTraineeDetails
@@ -93,7 +93,7 @@ public interface EmployeeService {
      *@param {@link Trainer} searchedUpdateTrainee object
      * @return {@link }
      */
-    boolean updatedTraineeDetails(int employeeId, Trainee searchedUpdateTrainee) throws Exception;
+    boolean updatedTraineeDetails(int employeeId, Trainee trainee) throws Exception;
     Map<String, Object> getTrainerObject(Trainer trainer);
     Map<String, Object> getTraineeObject(Trainee trainee);
     

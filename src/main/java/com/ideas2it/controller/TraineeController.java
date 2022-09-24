@@ -172,29 +172,73 @@ public class TraineeController extends HttpServlet {
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String paramValue = request.getParameter("id");
-        System.out.println(paramValue);
-        int id = Integer.parseInt(paramValue);
+        String uri = request.getRequestURI();
         PrintWriter printWriter = response.getWriter();
         String message = " ";
-
-        if (0 != id) {
-            boolean isCheckedDelete;
+        if (uri.equals("/ServletExample/trainee")) {
+            String paramValue = request.getParameter("id");
+            int traineeId = Integer.parseInt(paramValue);
+            if (0 != traineeId) {
+                boolean isCheckedDelete;
+                try {
+                    isCheckedDelete = employeeServiceImpl.deleteTraineeDetails(traineeId);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                if (isCheckedDelete) {
+                    printWriter.println(new Gson().toJson("Deleted sucessfully"));
+                    logger.info("Deleted sucessfully");
+                } else {
+                    printWriter.println(new Gson().toJson("not Deleted "));
+                    logger.info("not Deleted ");
+                }
+            } else {
+                printWriter.println(new Gson().toJson("Invalid id"));
+            }
+        } else if (uri.equals("/ServletExample/unassigntrainee")) {
             try {
-                isCheckedDelete = employeeServiceImpl.deleteTraineeDetails(id);
+
+                String paramValue1 = request.getParameter("traineeid");
+                int id = Integer.parseInt(paramValue1);
+                try {
+                    Trainee trainee = employeeServiceImpl.searchTraineeDetailsById(id);
+
+                    if (trainee != null) {
+                        List<Trainer> trainer = trainee.getTrainerDetails();
+                        String paramValueTrainee = request.getParameter("trainerid");
+                        int id1 = Integer.parseInt(paramValueTrainee);
+
+                        for (int i = 0; i <= trainer.size(); i++) {
+                            if (trainee.getTrainerDetails().get(i).getId() == id1) {
+                                trainer.remove(i);
+                                boolean isChecked = employeeServiceImpl.updatedTraineeDetails(id, trainee);
+                                if (isChecked) {
+                                    printWriter.println(new Gson().toJson("UnAssigned Sucessfull"));
+                                    logger.info("UnAssigned Sucessfull");
+                                } else {
+                                    printWriter.println(new Gson().toJson("not UnAssigned"));
+                                    logger.info("notAssigned");
+                                }
+                            }
+                        }
+
+                    } else {
+                        printWriter.println(new Gson().toJson("no trainee"));
+                        logger.info("no trainer");
+                    }
+                } catch (NumberFormatException exception) {
+                    printWriter.println(new Gson().toJson("Enter the valid trainerID"));
+                    logger.info("Enter the valid trainerID");
+                    throw exception;
+
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            if (isCheckedDelete) {
-                printWriter.println("Deleted sucessfully");
-                logger.info("Deleted sucessfully");
-            } else {
-                printWriter.println(new Gson().toJson("not Deleted "));
-                logger.info("not Deleted ");
-            }
+
         } else {
-            printWriter.println(" Trainer Id not found ");
-            logger.info(new Gson().toJson(" Trainer Id not found "));
+            printWriter.println(new Gson().toJson("Invalid URI"));
+            logger.info("Invalid URI");
         }
     }
 
@@ -245,17 +289,20 @@ public class TraineeController extends HttpServlet {
 
                     if (trainee != null) {
 
-                        String paramValueTrainee = request.getParameter("trainerid");
-                        String[] trainerId = paramValueTrainee.split(",");
-                        int id = 0;
+                         String  trainerId = request.getParameter("trainerid");
+                        String[] trainerId1 = trainerId.split(",");
+                        int id1 = 0;
 
-                        for (int i = 0; i < trainerId.length; i++) {
-                            id = Integer.valueOf(trainerId[i]);
+                        for (int i = 0; i < trainerId1.length; i++) {
+                            id1 = Integer.parseInt(trainerId1[i]);
 
                             for (Trainer retriveTrainer : trainer) {
 
-                                if (retriveTrainer.getId() == id) {
+                                if (retriveTrainer.getId() == id1) {
                                     trainee.getTrainerDetails().add(retriveTrainer);
+                                }
+                                else{
+                                    printWriter.println(new Gson().toJson("no trainer"));
                                 }
                             }
                         }

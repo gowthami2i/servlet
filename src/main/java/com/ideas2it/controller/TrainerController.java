@@ -22,6 +22,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <h1>Trainer Controller</h1>
@@ -184,31 +185,78 @@ public class TrainerController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String paramValue = request.getParameter("id");
-        int id = Integer.parseInt(paramValue);
-        System.out.println(id);
+
+        String uri = request.getRequestURI();
         PrintWriter printWriter = response.getWriter();
         String message = " ";
-
-        if (0 != id) {
-            boolean isCheckedDelete;
-            try {
-                isCheckedDelete = employeeServiceImpl.deleteTrainerDetails(id);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            if (isCheckedDelete) {
-                printWriter.println(new Gson().toJson("Deleted sucessfully"));
-                logger.info("Deleted sucessfully");
+        if (uri.equals("/ServletExample/trainer")) {
+            String paramValue = request.getParameter("id");
+            int trainerId = Integer.parseInt(paramValue);
+            if (0 != trainerId) {
+                boolean isCheckedDelete;
+                try {
+                    isCheckedDelete = employeeServiceImpl.deleteTrainerDetails(trainerId);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                if (isCheckedDelete) {
+                    printWriter.println(new Gson().toJson("Deleted sucessfully"));
+                    logger.info("Deleted sucessfully");
+                } else {
+                    printWriter.println(new Gson().toJson("not Deleted "));
+                    logger.info("not Deleted ");
+                }
             } else {
-                printWriter.println(new Gson().toJson("not Deleted "));
-                logger.info("not Deleted ");
+                printWriter.println(new Gson().toJson("Invalid id"));
             }
+        } else if (uri.equals("/ServletExample/unassigntrainer")) {
+            try {
+
+                String paramValue1 = request.getParameter("trainerid");
+                int id = Integer.parseInt(paramValue1);
+                try {
+                    Trainer trainer = employeeServiceImpl.searchTrainerDetailsById(id);
+
+                    if (trainer != null) {
+                        List<Trainee> trainee = trainer.getTraineeDetails();
+                        String paramValueTrainee = request.getParameter("traineeid");
+                        int id1 = Integer.parseInt(paramValueTrainee);
+
+                        for (int i = 0; i <= trainee.size(); i++) {
+                            if (trainer.getTraineeDetails().get(i).getId() == id1) {
+                                trainee.remove(i);
+                                boolean isChecked = employeeServiceImpl.updatedTrainerDetails(id, trainer);
+                                if (isChecked) {
+                                    printWriter.println(new Gson().toJson("UnAssigned Sucessfull"));
+                                    logger.info("UnAssigned Sucessfull");
+                                } else {
+                                    printWriter.println(new Gson().toJson("not UnAssigned"));
+                                    logger.info("notAssigned");
+                                }
+                            }
+                        }
+
+                    } else {
+                        printWriter.println(new Gson().toJson("no trainer"));
+                        logger.info("no trainer");
+                    }
+                } catch (NumberFormatException exception) {
+                    printWriter.println(new Gson().toJson("Enter the valid traineeID"));
+                    logger.info("Enter the valid traineeID");
+                    throw exception;
+
+                }
+            } catch (Exception e) {
+                System.out.println("no data"+e);
+            }
+
         } else {
-            printWriter.println(new Gson().toJson(" Trainer Id not found "));
-            logger.info(" Trainer Id not found ");
+            printWriter.println(new Gson().toJson("Invalid URI"));
+            logger.info("Invalid URI");
         }
     }
+
+
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -244,64 +292,68 @@ public class TrainerController extends HttpServlet {
                         logger.info("not Inserted");
                     }
                 }
-                } catch(SQLException e){
-                    throw new RuntimeException(e);
-                } catch(Exception e){
-                    throw new RuntimeException(e);
-                }
-            } else if (uri.equals("/ServletExample/assigntrainer")) {
-
-                try {
-
-                    String paramValue = request.getParameter("trainerid");
-                    int trainerId = Integer.parseInt(paramValue);
-                    List<Trainee> trainee = employeeServiceImpl.getTraineesFromDao();
-
-                    try {
-                        Trainer trainer = employeeServiceImpl.searchTrainerDetailsById(trainerId);
-
-                        if (trainer != null) {
-
-                            String paramValueTrainee = request.getParameter("traineeid");
-                            String[] traineeId = paramValueTrainee.split(",");
-                            int id = 0;
-
-                            for (int i = 0; i < traineeId.length; i++) {
-                                id = Integer.valueOf(traineeId[i]);
-
-                                for (Trainee retriveTrainee : trainee) {
-
-                                    if (retriveTrainee.getId() == id) {
-                                        trainer.getTraineeDetails().add(retriveTrainee);
-                                    }
-                                }
-                            }
-                            boolean isChecked = employeeServiceImpl.updatedTrainerDetails(trainerId, trainer);
-                            if (isChecked) {
-                                printWriter.println(new Gson().toJson("Assigned Sucessfull"));
-                                logger.info("Assigned Sucessfull");
-                            } else {
-                                printWriter.println(new Gson().toJson("notAssigned"));
-                                logger.info("notAssigned");
-                            }
-
-                        } else {
-
-                            printWriter.println(new Gson().toJson("no trainer"));
-                            logger.info("no trainer");
-                        }
-                    } catch (NumberFormatException exception) {
-                        printWriter.println(new Gson().toJson("Enter the valid traineeID"));
-                        logger.info("Enter the valid traineeID");
-                        throw exception;
-
-                    }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                printWriter.println(new Gson().toJson("Invalid URI"));
-                logger.info("Invalid URI");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
+        }else if (Objects.equals(uri, "/ServletExample/assigntrainer")) {
+
+            String paramValue = request.getParameter("trainerid");
+            int trainerId = Integer.parseInt(paramValue);
+            String id1 = request.getParameter("traineeid");
+            List<Trainee> list = null;
+
+            try {
+                list = employeeServiceImpl.getTraineesFromDao();
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                Trainer trainer = employeeServiceImpl.searchTrainerDetailsById(trainerId);
+
+                if (trainer != null) {
+                    String[] traineesId = id1.split(",");
+                    int id = 0;
+
+                    boolean isChecked = false;
+                    for (int i = 0; i <traineesId.length; i++) {
+                        id = Integer.valueOf(traineesId[i]);
+
+                            for (Trainee retriveTrainee : list) {
+
+                                if (retriveTrainee.getId() == id) {
+                                    trainer.getTraineeDetails().add(retriveTrainee);
+                                }
+                                isChecked = employeeServiceImpl.updatedTrainerDetails(trainerId, trainer);
+                            }
+                        }
+                        System.out.println("Ischecked : "+isChecked);
+                        if (isChecked) {
+                            printWriter.println(new Gson().toJson("Assigned Sucessfull"));
+                            logger.info("Assigned Sucessfull");
+                        } else {
+                            printWriter.println(new Gson().toJson("notAssigned"));
+                            logger.info("notAssigned");
+                        }
+
+                    } else {
+
+                        printWriter.println(new Gson().toJson("no trainee"));
+                        logger.info("no trainee");
+                    }
+                } catch (NumberFormatException exception) {
+                    printWriter.println(new Gson().toJson("Enter the valid trainerID"));
+                    throw exception;
+
+                } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            printWriter.println(new Gson().toJson("Invalid URI"));
+            logger.info("Invalid URI");
         }
     }
+}

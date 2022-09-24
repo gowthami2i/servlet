@@ -131,9 +131,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return {@link }
      */
     @Override
-    public boolean updatedTrainerDetails(int employeeId, Trainer searchedUpdateTrainer) throws Exception {
+    public boolean updatedTrainerDetails(int employeeId, Trainer trainer) throws Exception {
          
-       boolean isUpdateTrainer = employeeDaoImpl.modifyTrainerDetailsById(employeeId, searchedUpdateTrainer);  
+       boolean isUpdateTrainer = employeeDaoImpl.modifyTrainerDetailsById(employeeId, trainer);
        return isUpdateTrainer;     
     } 
 
@@ -144,9 +144,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return {@link }
      */                               
     @Override
-    public boolean updatedTraineeDetails(int employeeId, Trainee searchedUpdateTrainee) throws Exception{
+    public boolean updatedTraineeDetails(int employeeId, Trainee trainee) throws Exception{
          
-        boolean isUpdateTrainee = employeeDaoImpl.modifyTraineeDetailsById(employeeId, searchedUpdateTrainee);
+        boolean isUpdateTrainee = employeeDaoImpl.modifyTraineeDetailsById(employeeId, trainee);
         return isUpdateTrainee;
     }
     public Map<String, Object> getTrainerObject(Trainer trainer) {

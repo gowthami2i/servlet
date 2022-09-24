@@ -36,15 +36,16 @@
       <change beforePath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/TEST-com.ideas2it.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/TEST-com.ideas2it.AppTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/com.ideas2it.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/com.ideas2it.AppTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/util/EmployeeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/util/EmployeeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TraineeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TraineeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TrainerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TrainerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/dao/impl/EmployeeDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/dao/impl/EmployeeDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/service/impl/EmployeeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/service/impl/EmployeeServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,5 +167,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java</url>
+          <line>289</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java</url>
+          <line>292</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
