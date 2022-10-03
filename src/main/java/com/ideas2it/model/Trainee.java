@@ -48,12 +48,12 @@ public class Trainee extends Employee {
     private int task;
 
 
-    @ManyToMany(targetEntity = Trainer.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Trainee.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
                joinColumns = {@JoinColumn(name = "trainee_id")})
     @Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
-    
+    @JsonIgnore
     private List<Trainer> trainer;
 
     public void setId(int id) {

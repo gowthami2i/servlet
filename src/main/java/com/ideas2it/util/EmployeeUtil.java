@@ -39,7 +39,7 @@ public class  EmployeeUtil {
      * @param {@link String} name
      * @return {@link boolean) matcher
      */
-    public static boolean isValidateFirstName(String name) {
+    public static boolean isValidateFirstName(String name ) {
 
         String regex = "[A-Za-z\\s]{2,29}";
 	Pattern pattern = Pattern.compile(regex);

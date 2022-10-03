@@ -12,6 +12,7 @@ import java.util.List;
 import com.ideas2it.model.Trainee;
 import com.ideas2it.model.Trainer;
 import com.ideas2it.factory.EmployeeFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  * <h1>EmployeeDaoImpl</h1>
@@ -23,7 +24,8 @@ import com.ideas2it.factory.EmployeeFactory;
  * @version java 1.0
  * 
  */
-public class EmployeeDaoImpl {   
+@Repository
+public class EmployeeDaoImpl {
     /**
      * method is used to Insert Trainer into Database
      * @param {@link Trainer}trainer object
@@ -87,16 +89,16 @@ public class EmployeeDaoImpl {
         List<Trainer> trainers = new ArrayList<>();
 
         Session session = EmployeeFactory.getEmployeeFactory().openSession();
-        Transaction transaction = null;
+        //Transaction transaction = null;
       
         try {
-            transaction = session.beginTransaction();
+            session.beginTransaction();
             Criteria criteria = session.createCriteria(Trainer.class);
             criteria.add(Restrictions.eq("isRemoved", false));
             trainers = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();   
         } catch (HibernateException e) {
 
-            transaction.rollback();
+           // transaction.rollback();
             throw e;
  
         } finally {
@@ -146,7 +148,7 @@ public class EmployeeDaoImpl {
             transaction = session.beginTransaction();
             trainer = (Trainer) session.get(Trainer.class, trainerId);
             Criteria criteria = session.createCriteria(Trainer.class);
-            criteria.add(Restrictions.eq("isRemoved", false));    
+            criteria.add(Restrictions.eq("isRemoved", false)).list();
             return trainer;
              
         } catch (HibernateException e) {
@@ -189,6 +191,7 @@ public class EmployeeDaoImpl {
      */
     public boolean deleteTrainerById(int removeEmployeeId) throws Exception {
         Transaction transaction = null;
+        System.out.println(removeEmployeeId);
         boolean isDeleteTrainer = false;        
         try (Session session = EmployeeFactory.getEmployeeFactory().openSession()) {
 

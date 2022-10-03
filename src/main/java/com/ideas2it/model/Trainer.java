@@ -1,5 +1,6 @@
 package com.ideas2it.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinTable;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * <h1>Trainer </h1>
@@ -43,11 +45,12 @@ public class Trainer extends Employee  {
     @Column(name = "experience")
     private int experience;
 
-    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
                joinColumns = {@JoinColumn(name= "trainer_id")})
     @Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<Trainee> trainee;
     
     public void setId(int id) {

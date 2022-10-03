@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="751c9e0e-db58-4ff6-85f1-fb677f5988af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-servlet.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../servlet/.idea/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../servlet/.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../servlet/.idea/encodings.xml" afterDir="false" />
@@ -36,15 +37,21 @@
       <change beforePath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/TEST-com.ideas2it.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/TEST-com.ideas2it.AppTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/com.ideas2it.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../EmployeePortal/target/surefire-reports/com.ideas2it.AppTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/EmployeeController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ideas2it/util/EmployeeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ideas2it/util/EmployeeUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TraineeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TraineeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TrainerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/controller/TrainerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/dao/impl/EmployeeDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/dao/impl/EmployeeDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/model/Trainer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ideas2it/service/impl/EmployeeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ideas2it/service/impl/EmployeeServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,15 +90,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/Downloads/ServletDemo/ServletDemo/src/main/java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/LENOVO/Documents/java/TrainningProject/maven/ServletExample",
+    "settings.editor.selected.configurable": "configurable.group.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\LENOVO\Documents\java\TrainningProject\maven\ServletExample\src\main" />
@@ -105,7 +112,7 @@
       <predefined_log_file id="Tomcat Manager Log" />
       <predefined_log_file id="Tomcat Host Manager Log" />
       <option name="contextPath" value="/ServletExample" />
-      <option name="docBase" value="$PROJECT_DIR$/src/main/webapp" />
+      <option name="docBase" value="C:\Users\LENOVO\Documents\java\TrainningProject\maven\ServletExample\src\main\webapp" />
       <option name="tomcatInfo">
         <TomcatInfo>
           <option name="name" value="Apache Tomcat/8.5.82" />
@@ -171,17 +178,43 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java</url>
-          <line>289</line>
-          <option name="timeStamp" value="22" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/service/impl/EmployeeServiceImpl.java</url>
+          <line>120</line>
+          <properties class="com.ideas2it.service.impl.EmployeeServiceImpl" method="deleteTrainerDetails">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/dao/impl/EmployeeDaoImpl.java</url>
+          <line>191</line>
+          <properties class="com.ideas2it.dao.impl.EmployeeDaoImpl" method="deleteTrainerById">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TrainerController.java</url>
+          <line>144</line>
+          <properties class="com.ideas2it.controller.TrainerController" method="unAssignTrainer">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/controller/TraineeController.java</url>
-          <line>292</line>
-          <option name="timeStamp" value="26" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/ideas2it/model/Trainee.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
