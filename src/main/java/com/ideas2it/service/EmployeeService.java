@@ -44,7 +44,7 @@ public interface EmployeeService {
      * method is used to get Trainer from Dao
      * @return {@link Map<String , Trainer>} trainersFromDao object
      */
-    List<Trainer> getTrainersFromDao() throws Exception;
+    List<Trainer>  getTrainersFromDao() throws Exception;
 
     /**
      * method is used to get Trainee from Dao 
@@ -85,7 +85,7 @@ public interface EmployeeService {
      * @param {@link Trainer} searchedUpdateTrainer object
      * @return {@link }
      */
-    boolean updatedTrainerDetails(int employeeId, Trainer trainer) throws Exception;
+    boolean updatedTrainerDetails(Trainer trainer) throws Exception;
 
     /**
      * method is used to updateTraineeDetails
@@ -93,7 +93,7 @@ public interface EmployeeService {
      *@param {@link Trainer} searchedUpdateTrainee object
      * @return {@link }
      */
-    boolean updatedTraineeDetails(int employeeId, Trainee trainee) throws Exception;
+    boolean updatedTraineeDetails(Trainee trainee) throws Exception;
     Map<String, Object> getTrainerObject(Trainer trainer);
     Map<String, Object> getTraineeObject(Trainee trainee);
     

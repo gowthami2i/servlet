@@ -78,7 +78,7 @@ public interface EmployeeDao {
      * @param {@link String} employeeId
      * @param {@link Trainer} searchedUpdateTrainer Object
      */    
-    boolean modifyTrainerDetailsById(int trainerId, Trainer trainer);
+    boolean modifyTrainerDetailsById( Trainer trainer);
 
     /**
      * Update the Trainee by  using EmployeeId and user updateobject  

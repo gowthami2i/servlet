@@ -33,7 +33,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "trainee")
+@Table(name = "trainees")
 public class Trainee extends Employee {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +48,11 @@ public class Trainee extends Employee {
     private int task;
 
 
-    @ManyToMany(targetEntity = Trainee.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.LAZY)
-    @JoinTable(name = "trainerid_traineeid",
-               joinColumns = {@JoinColumn(name = "trainee_id")})
-    @Fetch(FetchMode.SELECT)
+    //@ManyToMany(targetEntity = Trainer.class,cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "trainee",fetch = FetchType.LAZY)
+   // @JoinTable(name = "trainerid_traineeid",
+     //          joinColumns = {@JoinColumn(name = "trainee_id")})
+   // @Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private List<Trainer> trainer;

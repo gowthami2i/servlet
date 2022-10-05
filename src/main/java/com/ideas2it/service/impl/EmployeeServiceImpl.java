@@ -77,7 +77,6 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public List<Trainee> getTraineesFromDao() throws Exception {
-
         List<Trainee> trainees = employeeDaoImpl.getTraineeDetails();
         return trainees;
     }
@@ -145,9 +144,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return {@link }
      */
     @Override
-    public boolean updatedTrainerDetails(int employeeId, Trainer trainer) throws Exception {
+    public boolean updatedTrainerDetails( Trainer trainer) throws Exception {
 
-        boolean isUpdateTrainer = employeeDaoImpl.modifyTrainerDetailsById(employeeId, trainer);
+        boolean isUpdateTrainer = employeeDaoImpl.modifyTrainerDetailsById( trainer);
         return isUpdateTrainer;
     }
 
@@ -159,9 +158,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return {@link }
      */
     @Override
-    public boolean updatedTraineeDetails(int employeeId, Trainee trainee) throws Exception {
+    public boolean updatedTraineeDetails(Trainee trainee) throws Exception {
 
-        boolean isUpdateTrainee = employeeDaoImpl.modifyTraineeDetailsById(employeeId, trainee);
+        boolean isUpdateTrainee = employeeDaoImpl.modifyTraineeDetailsById(trainee);
         return isUpdateTrainee;
     }
 

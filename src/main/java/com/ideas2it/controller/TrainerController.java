@@ -4,13 +4,17 @@ import com.ideas2it.model.Trainee;
 import com.ideas2it.model.Trainer;
 import com.ideas2it.service.EmployeeService;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>Trainer Controller</h1>
@@ -48,25 +52,34 @@ public class TrainerController extends HttpServlet {
     }
 
     @GetMapping(path = "/trainers", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE})
-    public List<Trainer> getTrainer() throws Exception {
-        List<Trainer> trainers = null;
-        trainers = employeeServiceImpl.getTrainersFromDao();
-        if (null != trainers) {
-            return trainers;
+    public List<Map<String,Object>> getTrainer() throws Exception {
+        List<Map<String,Object>> trainerList = new ArrayList<>();
+        List<Trainer> trainers = employeeServiceImpl.getTrainersFromDao();
+        for(Trainer trainer:trainers) {
+            Map<String,Object> trainer1 = employeeServiceImpl.getTrainerObject(trainer);
+            trainerList.add(trainer1);
+        }
+
+        if (null != trainerList) {
+            return trainerList;
         } else {
             return null;
         }
     }
 
     @GetMapping("/trainer/{id}")
-    public Trainer getTrainerById(@PathVariable int id) throws Exception {
+    public  Map<String,Object> getTrainerById(@PathVariable int id) throws Exception {
         int trainerId = id;
+
         Trainer trainer = employeeServiceImpl.searchTrainerDetailsById(trainerId);
-        Trainer getTrainer = null;
-        getTrainer = employeeServiceImpl.searchTrainerDetailsById(trainerId);
-        if (null != getTrainer) {
-            return getTrainer;
-        } else {
+        if(null != trainer) {
+            Map<String, Object> getTrainer = employeeServiceImpl.getTrainerObject(trainer);
+            if (null != getTrainer) {
+                return getTrainer;
+            } else {
+                return null;
+            }
+        } else{
             return null;
         }
     }
@@ -77,7 +90,7 @@ public class TrainerController extends HttpServlet {
         Trainer getTrainer = employeeServiceImpl.searchTrainerDetailsById(trainerId);
         boolean isChecked;
         if (null != getTrainer) {
-            isChecked = employeeServiceImpl.updatedTrainerDetails(trainerId, trainer);
+            isChecked = employeeServiceImpl.updatedTrainerDetails(trainer);
             if (isChecked) {
                 return "Updated SuccessFully";
             } else {
@@ -110,8 +123,7 @@ public class TrainerController extends HttpServlet {
                                 @PathVariable String traineeid) throws Exception {
         int id = trainerid;
         String id1 = traineeid;
-        List<Trainee> list = null;
-        list = employeeServiceImpl.getTraineesFromDao();
+        List<Trainee> list = employeeServiceImpl.getTraineesFromDao();
         Trainer trainer = employeeServiceImpl.searchTrainerDetailsById(id);
         if (trainer != null) {
             String[] traineesId = id1.split(",");
@@ -126,7 +138,7 @@ public class TrainerController extends HttpServlet {
                     if (retriveTrainee.getId() == id2) {
                         trainer.getTraineeDetails().add(retriveTrainee);
                     }
-                    isChecked = employeeServiceImpl.updatedTrainerDetails(id, trainer);
+                    isChecked = employeeServiceImpl.updatedTrainerDetails( trainer);
                 }
             }
             if (isChecked) {
@@ -153,7 +165,7 @@ public class TrainerController extends HttpServlet {
                 if (trainee.get(i).getId() == id1) {
                     trainee.remove(i);
                 }
-                isChecked = employeeServiceImpl.updatedTrainerDetails(id, trainer);
+                isChecked = employeeServiceImpl.updatedTrainerDetails( trainer);
             }
             if (isChecked) {
                 return ("UnAssigned Successful");

@@ -31,7 +31,7 @@ import javax.validation.constraints.NotEmpty;
  * 
  */
 @Entity
-@Table(name ="trainer")
+@Table(name ="trainers")
 public class Trainer extends Employee  {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,10 +45,12 @@ public class Trainer extends Employee  {
     @Column(name = "experience")
     private int experience;
 
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    //@ManyToMany(targetEntity = Trainee.class,cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinTable(name = "trainerid_traineeid",
-               joinColumns = {@JoinColumn(name= "trainer_id")})
-    @Fetch(FetchMode.SELECT)
+               joinColumns = {@JoinColumn(name= "trainer_id")},
+            inverseJoinColumns = { @JoinColumn(name = "trainee_id") })
+    //@Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private List<Trainee> trainee;

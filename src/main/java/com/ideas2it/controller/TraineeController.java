@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,21 +47,37 @@ public class TraineeController extends HttpServlet {
 
     @GetMapping(path = "/trainees", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public List<Trainee> getTrainee() throws Exception {
+    public List<Map<String,Object>> getTrainee() throws Exception {
+        List<Map<String,Object>> traineeList = new ArrayList<>();
         List<Trainee> trainees = employeeServiceImpl.getTraineesFromDao();
-        return trainees;
-    }
+        for(Trainee trainee:trainees) {
+            Map<String,Object> trainee1 = employeeServiceImpl.getTraineeObject(trainee);
+            traineeList.add(trainee1);
+        }
 
-    @GetMapping("/trainee/{id}")
-    public Trainee getTraineeById(@PathVariable int id) throws Exception {
-        int traineeId = id;
-        Trainee getTrainee = null;
-        getTrainee = employeeServiceImpl.searchTraineeDetailsById(traineeId);
-        if (null != getTrainee) {
-            return getTrainee;
+        if (null != traineeList) {
+            return traineeList;
         } else {
             return null;
         }
+    }
+
+    @GetMapping("/trainee/{id}")
+    public Map<String,Object> getTraineeById(@PathVariable int id) throws Exception {
+        int traineeId = id;
+
+        Trainee trainee = employeeServiceImpl.searchTraineeDetailsById(traineeId);
+        if(null != trainee) {
+            Map<String, Object> getTrainee = employeeServiceImpl.getTraineeObject(trainee);
+            if (null != getTrainee) {
+                return getTrainee;
+            } else {
+                return null;
+            }
+        } else{
+            return null;
+        }
+
     }
 
     @PutMapping(path = "/update_trainee")
@@ -68,7 +85,7 @@ public class TraineeController extends HttpServlet {
         int traineeId = trainee.getId();
         Trainee updateTrainee = employeeServiceImpl.searchTraineeDetailsById(traineeId);
         if (null != updateTrainee) {
-            boolean isChecked = employeeServiceImpl.updatedTraineeDetails(traineeId, trainee);
+            boolean isChecked = employeeServiceImpl.updatedTraineeDetails(trainee);
             if (isChecked) {
                 return "Updated SuccessFully";
             } else {
@@ -100,8 +117,7 @@ public class TraineeController extends HttpServlet {
                                 @PathVariable String trainerid) throws Exception {
         int id = traineeid;
         String id1 = trainerid;
-        List<Trainer> list = null;
-        list = employeeServiceImpl.getTrainersFromDao();
+        List<Trainer> list = employeeServiceImpl.getTrainersFromDao();
         Trainee trainee = employeeServiceImpl.searchTraineeDetailsById(id);
 
         if (trainee != null) {
@@ -117,7 +133,7 @@ public class TraineeController extends HttpServlet {
                     if (retriveTrainee.getId() == id2) {
                         trainee.getTrainerDetails().add(retriveTrainee);
                     }
-                    isChecked = employeeServiceImpl.updatedTraineeDetails(id, trainee);
+                    isChecked = employeeServiceImpl.updatedTraineeDetails(trainee);
                 }
             }
             System.out.println("Ischecked : " + isChecked);
@@ -143,7 +159,7 @@ public class TraineeController extends HttpServlet {
                 if (trainee.getTrainerDetails().get(i).getId() == id1) {
                     trainer.remove(i);
                 }
-                isChecked = employeeServiceImpl.updatedTraineeDetails(id, trainee);
+                isChecked = employeeServiceImpl.updatedTraineeDetails(trainee);
             }
             if (isChecked) {
                 return ("UnAssigned Successful");
